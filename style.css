@@ -23,7 +23,8 @@ select {
 }
 
 .mainContainer,
-.customizationContainer {
+.customizationContainer,
+.inputsContainer {
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
@@ -44,4 +45,8 @@ select {
 	height: 5rem;
 	width: 17rem;
 	font-size: 0.9rem;
+}
+
+.outputPreviewButton {
+	width: 100%;
 }

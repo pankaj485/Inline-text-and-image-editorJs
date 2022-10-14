@@ -6,6 +6,10 @@ class imageEditorJs {
 		};
 	}
 
+	constructor({ data }) {
+		this.data = data;
+	}
+
 	render() {
 		this.addOptionsForSelect = function () {
 			const options = ["left", "right", "top", "bottom"];
@@ -31,20 +35,32 @@ class imageEditorJs {
 
 		this.addClassNames = function () {
 			mainContainer.classList.add("mainContainer");
+			inputsContainer.classList.add("inputsContainer");
 			customizationContainer.classList.add("customizationContainer");
 			imageUrlInput.classList.add("imageUrlInput");
 			textContentInput.classList.add("textContentInput");
 			imagePositionInput.classList.add("imagePositionInput");
 			imageWidthInput.classList.add("imageWidthInput");
+
+			outputPreviewContainer.classList.add("textContentInput");
+			outputTextContainer.classList.add("imagePositionInput");
+			outputImageContainer.classList.add("imageWidthInput");
+			outputPreviewButton.classList.add("outputPreviewButton");
 		};
 
 		// create elements
 		const mainContainer = document.createElement("div");
+		const inputsContainer = document.createElement("div");
 		const customizationContainer = document.createElement("div");
 		const imageUrlInput = document.createElement("input");
 		const textContentInput = document.createElement("textarea");
 		const imagePositionInput = document.createElement("select");
 		const imageWidthInput = document.createElement("input");
+
+		const outputPreviewContainer = document.createElement("div");
+		const outputTextContainer = document.createElement("p");
+		const outputImageContainer = document.createElement("img");
+		const outputPreviewButton = document.createElement("button");
 
 		// add classnames to elements
 		this.addClassNames();
@@ -52,24 +68,42 @@ class imageEditorJs {
 		// add options on position select option
 		this.addOptionsForSelect();
 
-		// add placeholders
+		// add placeholders and values
 		imageUrlInput.placeholder = "Image Url";
 		textContentInput.placeholder = "text contents ...";
 		imageWidthInput.placeholder = "image width ...";
+		outputPreviewButton.textContent = "show output";
 
 		// append respective elements in order
 		customizationContainer.appendChild(imagePositionInput);
 		customizationContainer.appendChild(imageWidthInput);
-		mainContainer.appendChild(imageUrlInput);
-		mainContainer.appendChild(textContentInput);
-		mainContainer.appendChild(customizationContainer);
+		inputsContainer.appendChild(imageUrlInput);
+		inputsContainer.appendChild(textContentInput);
+		inputsContainer.appendChild(customizationContainer);
+		inputsContainer.appendChild(outputPreviewButton);
+		outputPreviewContainer.append(outputTextContainer);
+		outputPreviewContainer.append(outputImageContainer);
+		mainContainer.append(inputsContainer);
+		mainContainer.append(outputPreviewContainer);
+
+		outputPreviewButton.addEventListener("click", () => {});
 
 		return mainContainer;
 	}
 
 	save(blockContent) {
+		const imageUrl = blockContent.querySelector(".imageUrlInput").value;
+		const textContent = blockContent.querySelector(".textContentInput").value;
+		const imagePosition = blockContent.querySelector(
+			".imagePositionInput"
+		).value;
+		const imageWidth = blockContent.querySelector(".imageWidthInput").value;
+
 		return {
-			url: blockContent.value,
+			imageUrl: imageUrl,
+			textContent: textContent,
+			imagePosition: imagePosition,
+			imageWidth: imageWidth,
 		};
 	}
 }
