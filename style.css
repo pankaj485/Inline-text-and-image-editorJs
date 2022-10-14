@@ -1,0 +1,47 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+input,
+button,
+select {
+	padding: 0.2rem 0.5rem;
+	outline: none;
+	border: 2px solid blueviolet;
+	border-radius: 3px;
+	font-size: inherit;
+	width: fit-content;
+}
+
+.mainContainer {
+	margin-top: 1rem;
+	border: 2px solid rgba(112, 128, 144, 0.204);
+	padding: 0.5rem;
+	width: max-content;
+}
+
+.mainContainer,
+.customizationContainer {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.customizationContainer {
+	flex-direction: row;
+	width: 17rem;
+}
+
+.imageWidthInput {
+	width: 100%;
+}
+
+.textContentInput {
+	height: 5rem;
+	width: 17rem;
+	font-size: 0.9rem;
+}
