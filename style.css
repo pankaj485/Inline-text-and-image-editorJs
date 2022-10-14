@@ -50,3 +50,19 @@ select {
 .outputPreviewButton {
 	width: 100%;
 }
+
+.outputPreviewContainer {
+	display: flex;
+	gap: 0.5rem;
+	max-width: 700px;
+}
+
+.outputImageContainer {
+	padding: 0.5rem;
+	border: 2px solid red;
+}
+
+.outputTextContainer {
+	padding: 0.5rem;
+	border: 2px solid blue;
+}

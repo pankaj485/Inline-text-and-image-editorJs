@@ -8,18 +8,12 @@ class imageEditorJs {
 
 	constructor({ data }) {
 		this.data = data;
+		this.mainContainer = undefined;
 	}
 
 	render() {
 		this.addOptionsForSelect = function () {
-			const options = ["left", "right", "top", "bottom"];
-			const placeholderOption = document.createElement("option");
-
-			placeholderOption.disabled = true;
-			placeholderOption.selected = true;
-			placeholderOption.textContent = "Image position";
-
-			imagePositionInput.appendChild(placeholderOption);
+			const options = ["left", "right"];
 
 			for (
 				let currentOption = 0;
@@ -41,10 +35,6 @@ class imageEditorJs {
 			textContentInput.classList.add("textContentInput");
 			imagePositionInput.classList.add("imagePositionInput");
 			imageWidthInput.classList.add("imageWidthInput");
-
-			outputPreviewContainer.classList.add("textContentInput");
-			outputTextContainer.classList.add("imagePositionInput");
-			outputImageContainer.classList.add("imageWidthInput");
 			outputPreviewButton.classList.add("outputPreviewButton");
 		};
 
@@ -57,9 +47,6 @@ class imageEditorJs {
 		const imagePositionInput = document.createElement("select");
 		const imageWidthInput = document.createElement("input");
 
-		const outputPreviewContainer = document.createElement("div");
-		const outputTextContainer = document.createElement("p");
-		const outputImageContainer = document.createElement("img");
 		const outputPreviewButton = document.createElement("button");
 
 		// add classnames to elements
@@ -72,6 +59,12 @@ class imageEditorJs {
 		imageUrlInput.placeholder = "Image Url";
 		textContentInput.placeholder = "text contents ...";
 		imageWidthInput.placeholder = "image width ...";
+		imageUrlInput.value =
+			this.data && this.data.imageUrl ? this.data.imageUrl : "";
+		textContentInput.value =
+			this.data && this.data.textContent ? this.data.textContent : "";
+		imageWidthInput.value =
+			this.data && this.data.imageWidth ? this.data.imageWidth : "";
 		outputPreviewButton.textContent = "show output";
 
 		// append respective elements in order
@@ -81,18 +74,52 @@ class imageEditorJs {
 		inputsContainer.appendChild(textContentInput);
 		inputsContainer.appendChild(customizationContainer);
 		inputsContainer.appendChild(outputPreviewButton);
-		outputPreviewContainer.append(outputTextContainer);
-		outputPreviewContainer.append(outputImageContainer);
 		mainContainer.append(inputsContainer);
-		mainContainer.append(outputPreviewContainer);
 
-		outputPreviewButton.addEventListener("click", () => {});
+		outputPreviewButton.addEventListener("click", () => {
+			const imageUrl = imageUrlInput.value;
+			const imageWidth = imageWidthInput.value;
+			const textContent = textContentInput.value;
+			const imagePosition = imagePositionInput.value;
 
+			this._createImage(imageUrl, imageWidth, imagePosition, textContent);
+		});
+
+		this.mainContainer = mainContainer;
 		return mainContainer;
 	}
 
+	_createImage(imageUrl, imageWidth, imagePosition, textContent) {
+		console.log(imageUrl, imageWidth, imagePosition, textContent);
+
+		const outputPreviewContainer = document.createElement("div");
+		const outputTextContainer = document.createElement("p");
+		const outputImageContainer = document.createElement("img");
+
+		outputPreviewContainer.classList.add("outputPreviewContainer");
+		outputTextContainer.classList.add("outputTextContainer");
+		outputImageContainer.classList.add("outputImageContainer");
+
+		outputImageContainer.src = imageUrl;
+		outputImageContainer.style.width = imageWidth;
+		outputTextContainer.textContent = textContent;
+
+		switch (imagePosition) {
+			case "right":
+				outputPreviewContainer.append(outputTextContainer);
+				outputPreviewContainer.append(outputImageContainer);
+				break;
+			case "left":
+				outputPreviewContainer.append(outputImageContainer);
+				outputPreviewContainer.append(outputTextContainer);
+				break;
+		}
+
+		this.mainContainer.append(outputPreviewContainer);
+	}
+
 	save(blockContent) {
-		const imageUrl = blockContent.querySelector(".imageUrlInput").value;
+		const imageUrl = blockContent.querySelector(".imageUrlInput").value.trim();
 		const textContent = blockContent.querySelector(".textContentInput").value;
 		const imagePosition = blockContent.querySelector(
 			".imagePositionInput"
@@ -105,5 +132,20 @@ class imageEditorJs {
 			imagePosition: imagePosition,
 			imageWidth: imageWidth,
 		};
+	}
+
+	validate(savedData) {
+		const { imageUrl, textContent, imagePosition, imageWidth } = savedData;
+		const isValidated =
+			imageUrl &&
+			textContent &&
+			imagePosition !== "Image position" &&
+			imageWidth;
+
+		if (!isValidated) {
+			return false;
+		}
+
+		return true;
 	}
 }
