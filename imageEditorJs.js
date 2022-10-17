@@ -14,6 +14,7 @@ class imageEditorJs {
 	render() {
 		this.addOptionsForSelect = function () {
 			const options = ["left", "right"];
+			const imageWidthOption = ["10%", "20%", "30%", "40%", "50%"];
 
 			for (
 				let currentOption = 0;
@@ -24,6 +25,16 @@ class imageEditorJs {
 				createdOption.textContent = options[currentOption];
 
 				imagePositionInput.appendChild(createdOption);
+			}
+
+			for (
+				let currentOption = 0;
+				currentOption < imageWidthOption.length;
+				currentOption++
+			) {
+				const createdOption = document.createElement("option");
+				createdOption.textContent = imageWidthOption[currentOption];
+				imageWidthInputOption.appendChild(createdOption);
 			}
 		};
 
@@ -36,6 +47,7 @@ class imageEditorJs {
 			imagePositionInput.classList.add("imagePositionInput");
 			imageWidthInput.classList.add("imageWidthInput");
 			outputPreviewButton.classList.add("outputPreviewButton");
+			imageWidthInputOption.classList.add("imageWidthInputOption");
 		};
 
 		// create elements
@@ -45,6 +57,7 @@ class imageEditorJs {
 		const imageUrlInput = document.createElement("input");
 		const textContentInput = document.createElement("textarea");
 		const imagePositionInput = document.createElement("select");
+		const imageWidthInputOption = document.createElement("select");
 		const imageWidthInput = document.createElement("input");
 
 		const outputPreviewButton = document.createElement("button");
@@ -70,6 +83,7 @@ class imageEditorJs {
 		// append respective elements in order
 		customizationContainer.appendChild(imagePositionInput);
 		customizationContainer.appendChild(imageWidthInput);
+		customizationContainer.appendChild(imageWidthInputOption);
 		inputsContainer.appendChild(imageUrlInput);
 		inputsContainer.appendChild(textContentInput);
 		inputsContainer.appendChild(customizationContainer);
@@ -81,16 +95,43 @@ class imageEditorJs {
 			const imageWidth = imageWidthInput.value;
 			const textContent = textContentInput.value;
 			const imagePosition = imagePositionInput.value;
+			const imageWidthOption = imageWidthInputOption.value;
 
-			this._createImage(imageUrl, imageWidth, imagePosition, textContent);
+			this._createImage(
+				imageUrl,
+				imageWidth,
+				imagePosition,
+				textContent,
+				imageWidthOption
+			);
 		});
 
 		this.mainContainer = mainContainer;
 		return mainContainer;
 	}
 
-	_createImage(imageUrl, imageWidth, imagePosition, textContent) {
-		console.log(imageUrl, imageWidth, imagePosition, textContent);
+	_createImage(
+		imageUrl,
+		imageWidth,
+		imagePosition,
+		textContent,
+		imageWidthOption
+	) {
+		console.log(
+			imageUrl,
+			imageWidth,
+			imagePosition,
+			textContent,
+			imageWidthOption
+		);
+
+		this.setImageWidth = (imageWidthOption) => {
+			let imageWidthInPercentage = Number(imageWidthOption.split("%")[0]);
+			let contentWidthInPercentage = 100 - imageWidthInPercentage;
+
+			outputImageContainer.style.width = `${imageWidthInPercentage}%`;
+			outputTextContainer.style.width = `${contentWidthInPercentage}%`;
+		};
 
 		const outputPreviewContainer = document.createElement("div");
 		const outputTextContainer = document.createElement("p");
@@ -101,7 +142,7 @@ class imageEditorJs {
 		outputImageContainer.classList.add("outputImageContainer");
 
 		outputImageContainer.src = imageUrl;
-		outputImageContainer.style.width = imageWidth;
+		this.setImageWidth(imageWidthOption);
 		outputTextContainer.textContent = textContent;
 
 		switch (imagePosition) {
@@ -125,12 +166,15 @@ class imageEditorJs {
 			".imagePositionInput"
 		).value;
 		const imageWidth = blockContent.querySelector(".imageWidthInput").value;
-
+		const imageWidthPercentage = blockContent.querySelector(
+			".imageWidthInputOption"
+		).value;
 		return {
 			imageUrl: imageUrl,
 			textContent: textContent,
 			imagePosition: imagePosition,
 			imageWidth: imageWidth,
+			imageWidthPercentage: imageWidthPercentage,
 		};
 	}
 
