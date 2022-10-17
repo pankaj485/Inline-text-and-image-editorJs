@@ -45,7 +45,6 @@ class imageEditorJs {
 			imageUrlInput.classList.add("imageUrlInput");
 			textContentInput.classList.add("textContentInput");
 			imagePositionInput.classList.add("imagePositionInput");
-			imageWidthInput.classList.add("imageWidthInput");
 			outputPreviewButton.classList.add("outputPreviewButton");
 			imageWidthInputOption.classList.add("imageWidthInputOption");
 		};
@@ -58,7 +57,6 @@ class imageEditorJs {
 		const textContentInput = document.createElement("textarea");
 		const imagePositionInput = document.createElement("select");
 		const imageWidthInputOption = document.createElement("select");
-		const imageWidthInput = document.createElement("input");
 
 		const outputPreviewButton = document.createElement("button");
 
@@ -71,18 +69,14 @@ class imageEditorJs {
 		// add placeholders and values
 		imageUrlInput.placeholder = "Image Url";
 		textContentInput.placeholder = "text contents ...";
-		imageWidthInput.placeholder = "image width ...";
 		imageUrlInput.value =
 			this.data && this.data.imageUrl ? this.data.imageUrl : "";
 		textContentInput.value =
 			this.data && this.data.textContent ? this.data.textContent : "";
-		imageWidthInput.value =
-			this.data && this.data.imageWidth ? this.data.imageWidth : "";
 		outputPreviewButton.textContent = "show output";
 
 		// append respective elements in order
 		customizationContainer.appendChild(imagePositionInput);
-		customizationContainer.appendChild(imageWidthInput);
 		customizationContainer.appendChild(imageWidthInputOption);
 		inputsContainer.appendChild(imageUrlInput);
 		inputsContainer.appendChild(textContentInput);
@@ -92,38 +86,19 @@ class imageEditorJs {
 
 		outputPreviewButton.addEventListener("click", () => {
 			const imageUrl = imageUrlInput.value;
-			const imageWidth = imageWidthInput.value;
 			const textContent = textContentInput.value;
 			const imagePosition = imagePositionInput.value;
 			const imageWidthOption = imageWidthInputOption.value;
 
-			this._createImage(
-				imageUrl,
-				imageWidth,
-				imagePosition,
-				textContent,
-				imageWidthOption
-			);
+			this._createImage(imageUrl, imagePosition, textContent, imageWidthOption);
 		});
 
 		this.mainContainer = mainContainer;
 		return mainContainer;
 	}
 
-	_createImage(
-		imageUrl,
-		imageWidth,
-		imagePosition,
-		textContent,
-		imageWidthOption
-	) {
-		console.log(
-			imageUrl,
-			imageWidth,
-			imagePosition,
-			textContent,
-			imageWidthOption
-		);
+	_createImage(imageUrl, imagePosition, textContent, imageWidthOption) {
+		console.log(imageUrl, imagePosition, textContent, imageWidthOption);
 
 		this.setImageWidth = (imageWidthOption) => {
 			let imageWidthInPercentage = Number(imageWidthOption.split("%")[0]);
@@ -165,7 +140,6 @@ class imageEditorJs {
 		const imagePosition = blockContent.querySelector(
 			".imagePositionInput"
 		).value;
-		const imageWidth = blockContent.querySelector(".imageWidthInput").value;
 		const imageWidthPercentage = blockContent.querySelector(
 			".imageWidthInputOption"
 		).value;
@@ -173,18 +147,18 @@ class imageEditorJs {
 			imageUrl: imageUrl,
 			textContent: textContent,
 			imagePosition: imagePosition,
-			imageWidth: imageWidth,
 			imageWidthPercentage: imageWidthPercentage,
 		};
 	}
 
 	validate(savedData) {
-		const { imageUrl, textContent, imagePosition, imageWidth } = savedData;
+		const { imageUrl, textContent, imagePosition, imageWidthPercentage } =
+			savedData;
 		const isValidated =
 			imageUrl &&
 			textContent &&
 			imagePosition !== "Image position" &&
-			imageWidth;
+			imageWidthPercentage;
 
 		if (!isValidated) {
 			return false;
