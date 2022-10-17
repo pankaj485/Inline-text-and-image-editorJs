@@ -47,6 +47,10 @@ class imageEditorJs {
 			imagePositionInput.classList.add("imagePositionInput");
 			outputPreviewButton.classList.add("outputPreviewButton");
 			imageWidthInputOption.classList.add("imageWidthInputOption");
+			imagePositionLabel.classList.add("imagePositionLabel");
+			imageWidthLabel.classList.add("imageWidthLabel");
+			imageWidthContainer.classList.add("imageWidthContainer");
+			imagePositionContainer.classList.add("imagePositionContainer");
 		};
 
 		// create elements
@@ -57,7 +61,10 @@ class imageEditorJs {
 		const textContentInput = document.createElement("textarea");
 		const imagePositionInput = document.createElement("select");
 		const imageWidthInputOption = document.createElement("select");
-
+		const imagePositionContainer = document.createElement("div");
+		const imageWidthContainer = document.createElement("div");
+		const imagePositionLabel = document.createElement("label");
+		const imageWidthLabel = document.createElement("label");
 		const outputPreviewButton = document.createElement("button");
 
 		// add classnames to elements
@@ -74,13 +81,19 @@ class imageEditorJs {
 		textContentInput.value =
 			this.data && this.data.textContent ? this.data.textContent : "";
 		outputPreviewButton.textContent = "show output";
+		imageWidthLabel.textContent = "Width ";
+		imagePositionLabel.textContent = "Position ";
 
 		// append respective elements in order
-		customizationContainer.appendChild(imagePositionInput);
-		customizationContainer.appendChild(imageWidthInputOption);
+		imageWidthContainer.appendChild(imageWidthLabel);
+		imageWidthContainer.appendChild(imageWidthInputOption);
+		imagePositionContainer.appendChild(imagePositionLabel);
+		imagePositionContainer.appendChild(imagePositionInput);
+		customizationContainer.appendChild(imagePositionContainer);
+		customizationContainer.appendChild(imageWidthContainer);
 		inputsContainer.appendChild(imageUrlInput);
-		inputsContainer.appendChild(textContentInput);
 		inputsContainer.appendChild(customizationContainer);
+		inputsContainer.appendChild(textContentInput);
 		inputsContainer.appendChild(outputPreviewButton);
 		mainContainer.append(inputsContainer);
 

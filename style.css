@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 }
 
+body {
+	font-family: sans-serif;
+}
+
 input,
 button,
 select {
@@ -12,7 +16,11 @@ select {
 	border: 2px solid blueviolet;
 	border-radius: 3px;
 	font-size: inherit;
-	width: fit-content;
+}
+
+.imageUrlInput,
+.textContentInput {
+	width: 100%;
 }
 
 .mainContainer {
@@ -20,7 +28,10 @@ select {
 	border: 2px solid rgba(112, 128, 144, 0.204);
 	padding: 0.5rem;
 	width: max-content;
-	width: 700px;
+}
+
+.inputsContainer {
+	width: fit-content;
 }
 
 .mainContainer,
@@ -35,7 +46,7 @@ select {
 
 .customizationContainer {
 	flex-direction: row;
-	width: 17rem;
+	gap: 1rem;
 }
 
 .imageWidthInput {
@@ -44,8 +55,8 @@ select {
 
 .textContentInput {
 	height: 5rem;
-	width: 17rem;
 	font-size: 0.9rem;
+	margin: 0.5rem auto;
 }
 
 .outputPreviewButton {
@@ -54,6 +65,7 @@ select {
 
 .outputPreviewContainer {
 	width: 100%;
+	max-width: 700px;
 	display: flex;
 	gap: 0.5rem;
 	align-items: flex-start;
