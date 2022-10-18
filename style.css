@@ -32,6 +32,7 @@ select {
 
 .inputsContainer {
 	width: fit-content;
+	width: 500px;
 }
 
 .mainContainer,
@@ -57,6 +58,9 @@ select {
 	height: 5rem;
 	font-size: 0.9rem;
 	margin: 0.5rem auto;
+	border: 2px solid black;
+	height: 100%;
+	padding: 0.5rem;
 }
 
 .outputPreviewButton {

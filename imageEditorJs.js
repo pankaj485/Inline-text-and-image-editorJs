@@ -58,7 +58,7 @@ class imageEditorJs {
 		const inputsContainer = document.createElement("div");
 		const customizationContainer = document.createElement("div");
 		const imageUrlInput = document.createElement("input");
-		const textContentInput = document.createElement("textarea");
+		const textContentInput = document.createElement("div");
 		const imagePositionInput = document.createElement("select");
 		const imageWidthInputOption = document.createElement("select");
 		const imagePositionContainer = document.createElement("div");
@@ -78,8 +78,9 @@ class imageEditorJs {
 		textContentInput.placeholder = "text contents ...";
 		imageUrlInput.value =
 			this.data && this.data.imageUrl ? this.data.imageUrl : "";
-		textContentInput.value =
-			this.data && this.data.textContent ? this.data.textContent : "";
+		textContentInput.innerHTML =
+			this.data && this.data.caption ? this.data.caption : "";
+		textContentInput.contentEditable = true;
 		outputPreviewButton.textContent = "show output";
 		imageWidthLabel.textContent = "Width ";
 		imagePositionLabel.textContent = "Position ";
@@ -99,7 +100,7 @@ class imageEditorJs {
 
 		outputPreviewButton.addEventListener("click", () => {
 			const imageUrl = imageUrlInput.value;
-			const textContent = textContentInput.value;
+			const textContent = textContentInput.innerHTML;
 			const imagePosition = imagePositionInput.value;
 			const imageWidthOption = imageWidthInputOption.value;
 
@@ -149,7 +150,7 @@ class imageEditorJs {
 
 	save(blockContent) {
 		const imageUrl = blockContent.querySelector(".imageUrlInput").value.trim();
-		const textContent = blockContent.querySelector(".textContentInput").value;
+		const caption = blockContent.querySelector(".textContentInput").innerHTML;
 		const imagePosition = blockContent.querySelector(
 			".imagePositionInput"
 		).value;
@@ -158,18 +159,18 @@ class imageEditorJs {
 		).value;
 		return {
 			imageUrl: imageUrl,
-			textContent: textContent,
+			caption: caption,
 			imagePosition: imagePosition,
 			imageWidthPercentage: imageWidthPercentage,
 		};
 	}
 
 	validate(savedData) {
-		const { imageUrl, textContent, imagePosition, imageWidthPercentage } =
+		const { imageUrl, caption, imagePosition, imageWidthPercentage } =
 			savedData;
 		const isValidated =
 			imageUrl &&
-			textContent &&
+			caption &&
 			imagePosition !== "Image position" &&
 			imageWidthPercentage;
 
