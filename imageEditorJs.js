@@ -75,12 +75,12 @@ class imageEditorJs {
 
 		// add placeholders and values
 		imageUrlInput.placeholder = "Image Url";
-		textContentInput.placeholder = "text contents ...";
 		imageUrlInput.value =
 			this.data && this.data.imageUrl ? this.data.imageUrl : "";
+		textContentInput.contentEditable = true;
+		textContentInput.setAttribute("placeholder", "Content...");
 		textContentInput.innerHTML =
 			this.data && this.data.caption ? this.data.caption : "";
-		textContentInput.contentEditable = true;
 		outputPreviewButton.textContent = "show output";
 		imageWidthLabel.textContent = "Width ";
 		imagePositionLabel.textContent = "Position ";
@@ -123,7 +123,7 @@ class imageEditorJs {
 		};
 
 		const outputPreviewContainer = document.createElement("div");
-		const outputTextContainer = document.createElement("p");
+		const outputTextContainer = document.createElement("div");
 		const outputImageContainer = document.createElement("img");
 
 		outputPreviewContainer.classList.add("outputPreviewContainer");
@@ -132,7 +132,7 @@ class imageEditorJs {
 
 		outputImageContainer.src = imageUrl;
 		this.setImageWidth(imageWidthOption);
-		outputTextContainer.textContent = textContent;
+		outputTextContainer.innerHTML = textContent;
 
 		switch (imagePosition) {
 			case "right":

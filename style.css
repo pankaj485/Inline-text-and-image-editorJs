@@ -26,13 +26,18 @@ select {
 .mainContainer {
 	margin-top: 1rem;
 	border: 2px solid rgba(112, 128, 144, 0.204);
-	padding: 0.5rem;
 	width: max-content;
+	background-color: aliceblue;
 }
 
 .inputsContainer {
 	width: fit-content;
 	width: 500px;
+}
+
+.outputPreviewContainer,
+.inputsContainer {
+	padding: 0.5rem;
 }
 
 .mainContainer,
@@ -57,7 +62,6 @@ select {
 .textContentInput {
 	height: 5rem;
 	font-size: 0.9rem;
-	margin: 0.5rem auto;
 	border: 2px solid black;
 	height: 100%;
 	padding: 0.5rem;
@@ -73,13 +77,22 @@ select {
 	display: flex;
 	gap: 0.5rem;
 	align-items: flex-start;
+	outline: 1px solid rgb(220, 235, 249);
 }
 
 .outputImageContainer {
-	border: 2px solid red;
+	/* border: 2px solid red; */
 	object-fit: contain;
 }
 
 .outputTextContainer {
-	border: 2px solid blue;
+	font-size: 0.9rem;
+	/* border: 2px solid blue; */
+	padding: 0.5rem;
+}
+
+[contenteditable="true"]:empty:before {
+	content: attr(placeholder);
+	pointer-events: none;
+	display: block; /* For Firefox */
 }
