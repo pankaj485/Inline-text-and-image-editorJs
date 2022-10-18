@@ -146,8 +146,6 @@ class imageEditorJs {
 		outputTextContainer,
 		outputImageContainer
 	) {
-		console.log(imageUrl, imagePosition, textContent, imageWidthOption);
-
 		this.setImageWidth = (imageWidthOption) => {
 			let imageWidthInPercentage = Number(imageWidthOption.split("%")[0]);
 			let contentWidthInPercentage = 100 - imageWidthInPercentage;
@@ -176,29 +174,38 @@ class imageEditorJs {
 
 	save(blockContent) {
 		const imageUrl = blockContent.querySelector(".imageUrlInput").value.trim();
-		const caption = blockContent.querySelector(".textContentInput").innerHTML;
+		const captionElement = blockContent.querySelector(".textContentInput");
 		const imagePosition = blockContent.querySelector(
 			".imagePositionInput"
 		).value;
 		const imageWidthPercentage = blockContent.querySelector(
 			".imageWidthInputOption"
 		).value;
+
 		return {
 			imageUrl: imageUrl,
-			caption: caption,
+			caption: captionElement.innerHTML,
 			imagePosition: imagePosition,
 			imageWidthPercentage: imageWidthPercentage,
+			isCaptionEmpty: captionElement.textContent === "",
 		};
 	}
 
 	validate(savedData) {
-		const { imageUrl, caption, imagePosition, imageWidthPercentage } =
+		const { imageUrl, isCaptionEmpty, imagePosition, imageWidthPercentage } =
 			savedData;
-		const isValidated =
-			imageUrl &&
-			caption &&
-			imagePosition !== "Image position" &&
-			imageWidthPercentage;
+
+		let isValidated = false;
+
+		if (
+			imageUrl.length > 0 &&
+			!isCaptionEmpty &&
+			imagePosition &&
+			imageWidthPercentage
+		)
+			isValidated = true;
+
+		console.table(savedData);
 
 		if (!isValidated) {
 			return false;
