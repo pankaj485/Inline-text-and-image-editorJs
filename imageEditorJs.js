@@ -9,6 +9,9 @@ class imageEditorJs {
 	constructor({ data }) {
 		this.data = data;
 		this.mainContainer = undefined;
+		this.outputPreviewContainer = undefined;
+		this.outputTextContainer = undefined;
+		this.outputImageContainer = undefined;
 	}
 
 	render() {
@@ -51,6 +54,9 @@ class imageEditorJs {
 			imageWidthLabel.classList.add("imageWidthLabel");
 			imageWidthContainer.classList.add("imageWidthContainer");
 			imagePositionContainer.classList.add("imagePositionContainer");
+			outputPreviewContainer.classList.add("outputPreviewContainer");
+			outputTextContainer.classList.add("outputTextContainer");
+			outputImageContainer.classList.add("outputImageContainer");
 		};
 
 		// create elements
@@ -66,6 +72,14 @@ class imageEditorJs {
 		const imagePositionLabel = document.createElement("label");
 		const imageWidthLabel = document.createElement("label");
 		const outputPreviewButton = document.createElement("button");
+
+		// create UI for showing output and populate them globally
+		const outputPreviewContainer = document.createElement("div");
+		const outputTextContainer = document.createElement("div");
+		const outputImageContainer = document.createElement("img");
+		this.outputPreviewContainer = outputPreviewContainer;
+		this.outputTextContainer = outputTextContainer;
+		this.outputImageContainer = outputImageContainer;
 
 		// add classnames to elements
 		this.addClassNames();
@@ -104,14 +118,34 @@ class imageEditorJs {
 			const imagePosition = imagePositionInput.value;
 			const imageWidthOption = imageWidthInputOption.value;
 
-			this._createImage(imageUrl, imagePosition, textContent, imageWidthOption);
+			const outputPreviewContainer = this.outputPreviewContainer;
+			const outputTextContainer = this.outputTextContainer;
+			const outputImageContainer = this.outputImageContainer;
+
+			this._createImage(
+				imageUrl,
+				imagePosition,
+				textContent,
+				imageWidthOption,
+				outputPreviewContainer,
+				outputTextContainer,
+				outputImageContainer
+			);
 		});
 
 		this.mainContainer = mainContainer;
 		return mainContainer;
 	}
 
-	_createImage(imageUrl, imagePosition, textContent, imageWidthOption) {
+	_createImage(
+		imageUrl,
+		imagePosition,
+		textContent,
+		imageWidthOption,
+		outputPreviewContainer,
+		outputTextContainer,
+		outputImageContainer
+	) {
 		console.log(imageUrl, imagePosition, textContent, imageWidthOption);
 
 		this.setImageWidth = (imageWidthOption) => {
@@ -121,14 +155,6 @@ class imageEditorJs {
 			outputImageContainer.style.width = `${imageWidthInPercentage}%`;
 			outputTextContainer.style.width = `${contentWidthInPercentage}%`;
 		};
-
-		const outputPreviewContainer = document.createElement("div");
-		const outputTextContainer = document.createElement("div");
-		const outputImageContainer = document.createElement("img");
-
-		outputPreviewContainer.classList.add("outputPreviewContainer");
-		outputTextContainer.classList.add("outputTextContainer");
-		outputImageContainer.classList.add("outputImageContainer");
 
 		outputImageContainer.src = imageUrl;
 		this.setImageWidth(imageWidthOption);
