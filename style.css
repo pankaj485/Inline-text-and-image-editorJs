@@ -96,3 +96,6 @@ select {
 	pointer-events: none;
 	display: block; /* For Firefox */
 }
+
+#textContentInput {
+}
