@@ -47,6 +47,7 @@ class imageEditorJs {
 			customizationContainer.classList.add("customizationContainer");
 			imageUrlInput.classList.add("imageUrlInput");
 			textContentInput.classList.add("textContentInput");
+			textContentInput.id = "textContentInput";
 			imagePositionInput.classList.add("imagePositionInput");
 			outputPreviewButton.classList.add("outputPreviewButton");
 			imageWidthInputOption.classList.add("imageWidthInputOption");
@@ -98,6 +99,15 @@ class imageEditorJs {
 		outputPreviewButton.textContent = "show output";
 		imageWidthLabel.textContent = "Width ";
 		imagePositionLabel.textContent = "Position ";
+
+		// create new editorJs instance and use it inside editableDiv element
+		let textContentInput_editorjs_instance = new EditorJS({
+			autofocus: true,
+			holder: "textContentInput",
+			tools: {},
+		});
+
+		console.log(textContentInput_editorjs_instance);
 
 		// append respective elements in order
 		imageWidthContainer.appendChild(imageWidthLabel);

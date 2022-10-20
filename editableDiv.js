@@ -43,8 +43,6 @@ class editableDiv {
 			tools: {},
 		});
 
-		console.log(editorjs_instance);
-
 		this.mainContainer = mainContainer;
 		return this.mainContainer;
 	}
