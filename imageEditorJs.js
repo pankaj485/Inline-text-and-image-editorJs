@@ -15,6 +15,21 @@ class imageEditorJs {
 	}
 
 	render() {
+		this.useNestedEditorJs = () => {
+			// create new editorJs instance and use it inside editableDiv element
+			let textContentInput_editorjs_instance = new EditorJS({
+				autofocus: true,
+				holder: "textContentInput",
+				tools: {
+					paragraphWithAlignment: { class: Paragraph },
+					nestedList: {
+						class: NestedList,
+						inlineToolbar: true,
+					},
+				},
+			});
+		};
+
 		this.addOptionsForSelect = function () {
 			const options = ["left", "right"];
 			const imageWidthOption = ["10%", "20%", "30%", "40%", "50%"];
@@ -100,18 +115,8 @@ class imageEditorJs {
 		imageWidthLabel.textContent = "Width ";
 		imagePositionLabel.textContent = "Position ";
 
-		// create new editorJs instance and use it inside editableDiv element
-		let textContentInput_editorjs_instance = new EditorJS({
-			autofocus: true,
-			holder: "textContentInput",
-			tools: {
-				paragraphWithAlignment: { class: Paragraph },
-				nestedList: {
-					class: NestedList,
-					inlineToolbar: true,
-				},
-			},
-		});
+		// use nested editor js on textInput
+		this.useNestedEditorJs();
 
 		// append respective elements in order
 		imageWidthContainer.appendChild(imageWidthLabel);
