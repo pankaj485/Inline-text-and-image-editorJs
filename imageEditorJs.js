@@ -93,6 +93,7 @@ class imageEditorJs {
 			// create new editorJs instance and use it inside editableDiv element
 			let textContentInput_editorjs_instance = new EditorJS({
 				holder: "textContentInput",
+				autofocus: true,
 				tools: tools,
 				data: data,
 				defaultBlock: "layout",

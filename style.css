@@ -83,7 +83,7 @@ select {
 	align-items: flex-start;
 	gap: 0.5rem;
 	border: 2px solid #d6e0e8;
-	background-color: #f0f8ff;
+	background-color: #f9fcff;
 	border-radius: 5px;
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.197);
 }
@@ -112,7 +112,8 @@ dialog {
 	width: 100%;
 }
 
-.textContentInput .ce-toolbar__actions {
+.textContentInput .ce-toolbar__actions,
+.outputPreviewContainer.ce-toolbar__actions {
 	display: none;
 }
 
@@ -125,10 +126,7 @@ dialog {
 	padding-bottom: 0rem !important;
 }
 
-.textContentInput .codex-editor--empty {
+.textContentInput .codex-editor--empty .codex-editor--empty,
+.outputTextContainer .ce-block__content :empty {
 	display: none;
-}
-
-.textContentInput .codex-editor--empty:first-of-type {
-	display: block;
 }
