@@ -15,6 +15,28 @@ class imageEditorJs {
 	}
 
 	render() {
+		const data = {
+			blocks: [
+				{
+					type: "layout",
+					data: {
+						itemContent: {
+							1: {
+								blocks: [
+									{
+										type: "paragraph",
+										data: {
+											text: "Text contents input...",
+										},
+									},
+								],
+							},
+						},
+					},
+				},
+			],
+		};
+
 		const editorJSConfig = {
 			tools: {
 				header: {
@@ -50,14 +72,14 @@ class imageEditorJs {
 							type: "container",
 							id: "",
 							className: "",
-							style: "box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.197);",
+							style: "",
 							children: [
 								{
 									type: "item",
 									id: "",
 									className: "hello",
 									style:
-										"display: inline-block; width:100%; padding: 0.5rem; box-sizing: border-box; ",
+										"display: inline-block; width:100%; box-sizing: border-box; ",
 									itemContentId: "1",
 								},
 							],
@@ -71,8 +93,8 @@ class imageEditorJs {
 			// create new editorJs instance and use it inside editableDiv element
 			let textContentInput_editorjs_instance = new EditorJS({
 				holder: "textContentInput",
-				placeholder: "Let's write an awesome story!",
 				tools: tools,
+				data: data,
 				defaultBlock: "layout",
 			});
 		};

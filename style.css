@@ -13,10 +13,15 @@ button,
 select {
 	padding: 0.3rem 0.5rem;
 	outline: none;
-	border: 2px solid #6358e6;
+	border: 2px solid #171241;
 	background-color: #f6f6f6;
 	border-radius: 3px;
 	font-size: inherit;
+}
+
+.textContentInput {
+	border: none;
+	box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.197);
 }
 
 .mainContainer {
@@ -40,12 +45,11 @@ select {
 .textContentInput {
 	min-height: 6.25rem;
 	height: 100%;
-	border: 2px solid #6358e6;
-	background-color: #fafafa;
+	/* border: 2px solid #171241; */
 	border-radius: 5px;
-	padding: 0.5rem;
-	padding-bottom: 0;
 	outline: none;
+	padding: 0.5rem;
+	background-color: #fcfcfc;
 }
 
 .outputPreviewContainer,
@@ -108,10 +112,6 @@ dialog {
 	width: 100%;
 }
 
-.textContentInput .ce-block {
-	margin-bottom: 1rem;
-}
-
 .textContentInput .ce-toolbar__actions {
 	display: none;
 }
@@ -123,4 +123,12 @@ dialog {
 
 .outputTextContainer .codex-editor__redactor:first-of-type {
 	padding-bottom: 0rem !important;
+}
+
+.textContentInput .codex-editor--empty {
+	display: none;
+}
+
+.textContentInput .codex-editor--empty:first-of-type {
+	display: block;
 }
