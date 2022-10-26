@@ -15,18 +15,66 @@ class imageEditorJs {
 	}
 
 	render() {
+		const editorJSConfig = {
+			tools: {
+				header: {
+					class: Header,
+					shortcut: "CMD+SHIFT+H",
+				},
+				nestedList: {
+					class: NestedList,
+					inlineToolbar: true,
+				},
+				// paragraphWithAlignment: {
+				// 	class: Paragraph,
+				// 	inlineToolbar: true,
+				// },
+			},
+		};
+
+		const tools = {
+			layout: {
+				class: EditorJSLayout.LayoutBlockTool,
+				config: {
+					EditorJS,
+					editorJSConfig,
+					enableLayoutEditing: false,
+					enableLayoutSaving: true,
+					initialData: {
+						itemContent: {
+							1: {
+								blocks: [],
+							},
+						},
+						layout: {
+							type: "container",
+							id: "",
+							className: "",
+							style: "box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.197);",
+							children: [
+								{
+									type: "item",
+									id: "",
+									className: "hello",
+									style:
+										"display: inline-block; width:100%; padding: 0.5rem; box-sizing: border-box; ",
+									itemContentId: "1",
+								},
+							],
+						},
+					},
+				},
+			},
+		};
+
 		this.useNestedEditorJs = () => {
 			// create new editorJs instance and use it inside editableDiv element
 			let textContentInput_editorjs_instance = new EditorJS({
 				autofocus: true,
 				holder: "textContentInput",
-				tools: {
-					paragraphWithAlignment: { class: Paragraph },
-					nestedList: {
-						class: NestedList,
-						inlineToolbar: true,
-					},
-				},
+				placeholder: "Let's write an awesome story!",
+				tools: tools,
+				defaultBlock: "layout",
 			});
 		};
 
