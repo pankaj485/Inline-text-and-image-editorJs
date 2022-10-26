@@ -44,6 +44,7 @@ select {
 	background-color: #fafafa;
 	border-radius: 5px;
 	padding: 0.5rem;
+	padding-bottom: 0;
 	outline: none;
 }
 
@@ -91,11 +92,11 @@ select {
 	font-size: 0.9rem;
 }
 
-[contenteditable="true"]:empty:before {
+/* [contenteditable="true"]:empty:before {
 	content: attr(placeholder);
 	pointer-events: none;
-	display: block; /* For Firefox */
-}
+	display: block; 
+} */
 
 dialog {
 	margin: auto;
@@ -109,4 +110,17 @@ dialog {
 
 .textContentInput .ce-block {
 	margin-bottom: 1rem;
+}
+
+.textContentInput .ce-toolbar__actions {
+	display: none;
+}
+
+.textContentInput .ce-block__content {
+	min-width: 100%;
+	margin: auto;
+}
+
+.outputTextContainer .codex-editor__redactor:first-of-type {
+	padding-bottom: 0rem !important;
 }

@@ -70,7 +70,6 @@ class imageEditorJs {
 		this.useNestedEditorJs = () => {
 			// create new editorJs instance and use it inside editableDiv element
 			let textContentInput_editorjs_instance = new EditorJS({
-				autofocus: true,
 				holder: "textContentInput",
 				placeholder: "Let's write an awesome story!",
 				tools: tools,
@@ -155,8 +154,8 @@ class imageEditorJs {
 		imageUrlInput.placeholder = "Image Url";
 		imageUrlInput.value =
 			this.data && this.data.imageUrl ? this.data.imageUrl : "";
-		textContentInput.contentEditable = true;
-		textContentInput.setAttribute("placeholder", "Content...");
+		// textContentInput.contentEditable = true;
+		// textContentInput.setAttribute("placeholder", "Content...");
 		textContentInput.innerHTML =
 			this.data && this.data.caption ? this.data.caption : "";
 		outputPreviewButton.textContent = "show output";
