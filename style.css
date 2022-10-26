@@ -72,9 +72,24 @@ select {
 	gap: 1rem;
 }
 
-.outputPreviewButton {
+.outputControllers {
+	width: inherit;
+	display: flex;
+	gap: 1rem;
+}
+
+.showOutputPreviewButton,
+.hideOutputPreviewButton {
 	width: 100%;
 	padding: 0.5rem;
+}
+
+.showOutputPreviewButton:hover,
+.hideOutputPreviewButton:hover {
+	outline: 2px solid #6a5cea;
+	border: none;
+	background-color: #e2e2ff;
+	box-sizing: border-box;
 }
 
 .outputPreviewContainer {

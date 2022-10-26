@@ -134,7 +134,9 @@ class imageEditorJs {
 			textContentInput.classList.add("textContentInput");
 			textContentInput.id = "textContentInput";
 			imagePositionInput.classList.add("imagePositionInput");
-			outputPreviewButton.classList.add("outputPreviewButton");
+			showOutputPreviewButton.classList.add("showOutputPreviewButton");
+			outputControllers.classList.add("outputControllers");
+			hideOutputPreviewButton.classList.add("hideOutputPreviewButton");
 			imageWidthInputOption.classList.add("imageWidthInputOption");
 			imagePositionLabel.classList.add("imagePositionLabel");
 			imageWidthLabel.classList.add("imageWidthLabel");
@@ -157,7 +159,9 @@ class imageEditorJs {
 		const imageWidthContainer = document.createElement("div");
 		const imagePositionLabel = document.createElement("label");
 		const imageWidthLabel = document.createElement("label");
-		const outputPreviewButton = document.createElement("button");
+		const outputControllers = document.createElement("div");
+		const showOutputPreviewButton = document.createElement("button");
+		const hideOutputPreviewButton = document.createElement("button");
 
 		// create UI for showing output and populate them globally
 		const outputPreviewContainer = document.createElement("div");
@@ -181,7 +185,8 @@ class imageEditorJs {
 		// textContentInput.setAttribute("placeholder", "Content...");
 		textContentInput.innerHTML =
 			this.data && this.data.caption ? this.data.caption : "";
-		outputPreviewButton.textContent = "show output";
+		showOutputPreviewButton.textContent = "show output";
+		hideOutputPreviewButton.textContent = "hide output";
 		imageWidthLabel.textContent = "Width ";
 		imagePositionLabel.textContent = "Position ";
 
@@ -198,10 +203,12 @@ class imageEditorJs {
 		inputsContainer.appendChild(imageUrlInput);
 		inputsContainer.appendChild(customizationContainer);
 		inputsContainer.appendChild(textContentInput);
-		inputsContainer.appendChild(outputPreviewButton);
+		outputControllers.appendChild(showOutputPreviewButton);
+		outputControllers.appendChild(hideOutputPreviewButton);
+		inputsContainer.appendChild(outputControllers);
 		mainContainer.append(inputsContainer);
 
-		outputPreviewButton.addEventListener("click", () => {
+		showOutputPreviewButton.addEventListener("click", () => {
 			const imageUrl = imageUrlInput.value;
 			const textContent = textContentInput.innerHTML;
 			const imagePosition = imagePositionInput.value;
@@ -210,6 +217,8 @@ class imageEditorJs {
 			const outputPreviewContainer = this.outputPreviewContainer;
 			const outputTextContainer = this.outputTextContainer;
 			const outputImageContainer = this.outputImageContainer;
+
+			outputPreviewContainer.style.display = "flex";
 
 			this._createImage(
 				imageUrl,
@@ -220,6 +229,10 @@ class imageEditorJs {
 				outputTextContainer,
 				outputImageContainer
 			);
+		});
+
+		hideOutputPreviewButton.addEventListener("click", () => {
+			document.querySelector(".outputPreviewContainer").style.display = "none";
 		});
 
 		this.mainContainer = mainContainer;
@@ -238,7 +251,6 @@ class imageEditorJs {
 		this.setImageWidth = (imageWidthOption) => {
 			let imageWidthInPercentage = Number(imageWidthOption.split("%")[0]);
 			let contentWidthInPercentage = 100 - imageWidthInPercentage;
-
 			outputImageContainer.style.width = `${imageWidthInPercentage}%`;
 			outputTextContainer.style.width = `${contentWidthInPercentage}%`;
 		};
