@@ -1,6 +1,14 @@
 # inline-text-and-image-editorJs
 
-creating custom editorJs plugin which includes option to add an image and text input on same block.
+creating custom editorJs plugin which includes option to add an image and rich text input on same block.
+
+The rich text input utilizes [editorjs-layout](https://github.com/hata6502/editorjs-layout) plugin for rich text input support.
+
+List of plugins available in the text input:
+
+- [header](https://github.com/editor-js/header)
+- [list](https://github.com/editor-js/list)
+- [nested list](https://github.com/editor-js/nested-list) (disabled)
 
 ### Running app through CLI with live-server
 
