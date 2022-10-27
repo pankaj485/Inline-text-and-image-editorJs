@@ -47,10 +47,17 @@ class imageEditorJs {
 						defaultLevel: 3,
 					},
 				},
-				nestedList: {
-					class: NestedList,
+				list: {
+					class: List,
 					inlineToolbar: true,
+					config: {
+						defaultStyle: "unordered",
+					},
 				},
+				// nestedList: {
+				// 	class: NestedList,
+				// 	inlineToolbar: true,
+				// },
 			},
 		};
 
