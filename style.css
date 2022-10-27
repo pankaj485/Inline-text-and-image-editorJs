@@ -20,11 +20,7 @@ select {
 	background-color: #f6f6f6;
 	border-radius: 3px;
 	font-size: inherit;
-}
-
-.textContentInput {
-	border: none;
-	box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.197);
+	font-family: inherit;
 }
 
 .mainContainer {
@@ -40,6 +36,17 @@ select {
 	border-radius: 5px;
 }
 
+.imageUrlInputContainer {
+	width: inherit;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.imageUrlLabel {
+	min-width: fit-content;
+}
+
 .imageUrlInput,
 .textContentInput {
 	width: 100%;
@@ -48,11 +55,13 @@ select {
 .textContentInput {
 	min-height: 6.25rem;
 	height: 100%;
-	/* border: 2px solid #171241; */
 	border-radius: 5px;
 	outline: none;
 	padding: 0.5rem;
-	background-color: #fcfcfc;
+	background-color: #f8f8f8;
+	border: none;
+	box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.197);
+	margin: 0.5rem auto;
 }
 
 .outputPreviewContainer,
@@ -87,10 +96,11 @@ select {
 	width: 100%;
 	padding: 0.5rem;
 	text-transform: capitalize;
+	font-size: 0.9rem;
 }
 
 .saveTextContentsButton {
-	background-color: #e6e8fd;
+	background-color: #ecedff;
 	border: 2px solid #6a5cea;
 }
 
@@ -142,7 +152,7 @@ dialog {
 
 .textContentInput .ce-toolbar__actions,
 .outputPreviewContainer.ce-toolbar__actions {
-	display: none;
+	display: none !important;
 }
 
 .textContentInput .ce-block__content {

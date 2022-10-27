@@ -141,6 +141,8 @@ class imageEditorJs {
 			mainContainer.classList.add("mainContainer");
 			inputsContainer.classList.add("inputsContainer");
 			customizationContainer.classList.add("customizationContainer");
+			imageUrlInputContainer.classList.add("imageUrlInputContainer");
+			imageUrlLabel.classList.add("imageUrlLabel");
 			imageUrlInput.classList.add("imageUrlInput");
 			textContentInput.classList.add("textContentInput");
 			textContentInput.id = "textContentInput";
@@ -163,6 +165,8 @@ class imageEditorJs {
 		const mainContainer = document.createElement("div");
 		const inputsContainer = document.createElement("div");
 		const customizationContainer = document.createElement("div");
+		const imageUrlInputContainer = document.createElement("div");
+		const imageUrlLabel = document.createElement("p");
 		const imageUrlInput = document.createElement("input");
 		const textContentInput = document.createElement("div");
 		const imagePositionInput = document.createElement("select");
@@ -191,7 +195,8 @@ class imageEditorJs {
 		this.addOptionsForSelect();
 
 		// add placeholders and values
-		imageUrlInput.placeholder = "Image Url";
+		imageUrlLabel.textContent = "Image Url:";
+		imageUrlInput.placeholder = "add image url...";
 		imageUrlInput.value =
 			this.data && this.data.imageUrl ? this.data.imageUrl : "";
 		// textContentInput.contentEditable = true;
@@ -201,8 +206,8 @@ class imageEditorJs {
 		saveTextContentsButton.textContent = "save contents";
 		showOutputPreviewButton.textContent = "show output";
 		hideOutputPreviewButton.textContent = "hide output";
-		imageWidthLabel.textContent = "Width ";
-		imagePositionLabel.textContent = "Position ";
+		imageWidthLabel.textContent = "Image Width ";
+		imagePositionLabel.textContent = "Image Position ";
 
 		// use nested editor js on textInput
 		this.useNestedEditorJs();
@@ -214,7 +219,10 @@ class imageEditorJs {
 		imagePositionContainer.appendChild(imagePositionInput);
 		customizationContainer.appendChild(imagePositionContainer);
 		customizationContainer.appendChild(imageWidthContainer);
-		inputsContainer.appendChild(imageUrlInput);
+
+		imageUrlInputContainer.appendChild(imageUrlLabel);
+		imageUrlInputContainer.appendChild(imageUrlInput);
+		inputsContainer.appendChild(imageUrlInputContainer);
 		inputsContainer.appendChild(customizationContainer);
 		inputsContainer.appendChild(textContentInput);
 		outputControllers.appendChild(saveTextContentsButton);
