@@ -12,6 +12,8 @@ class imageEditorJs {
 		this.outputPreviewContainer = undefined;
 		this.outputTextContainer = undefined;
 		this.outputImageContainer = undefined;
+		this.layoutEditorJs = undefined;
+		this.textContent = undefined;
 	}
 
 	render() {
@@ -105,6 +107,8 @@ class imageEditorJs {
 				data: data,
 				defaultBlock: "layout",
 			});
+
+			this.layoutEditorJs = textContentInput_editorjs_instance;
 		};
 
 		this.addOptionsForSelect = function () {
@@ -144,6 +148,7 @@ class imageEditorJs {
 			showOutputPreviewButton.classList.add("showOutputPreviewButton");
 			outputControllers.classList.add("outputControllers");
 			hideOutputPreviewButton.classList.add("hideOutputPreviewButton");
+			saveTextContentsButton.classList.add("saveTextContentsButton");
 			imageWidthInputOption.classList.add("imageWidthInputOption");
 			imagePositionLabel.classList.add("imagePositionLabel");
 			imageWidthLabel.classList.add("imageWidthLabel");
@@ -169,6 +174,7 @@ class imageEditorJs {
 		const outputControllers = document.createElement("div");
 		const showOutputPreviewButton = document.createElement("button");
 		const hideOutputPreviewButton = document.createElement("button");
+		const saveTextContentsButton = document.createElement("button");
 
 		// create UI for showing output and populate them globally
 		const outputPreviewContainer = document.createElement("div");
@@ -192,6 +198,7 @@ class imageEditorJs {
 		// textContentInput.setAttribute("placeholder", "Content...");
 		textContentInput.innerHTML =
 			this.data && this.data.caption ? this.data.caption : "";
+		saveTextContentsButton.textContent = "save cotents";
 		showOutputPreviewButton.textContent = "show output";
 		hideOutputPreviewButton.textContent = "hide output";
 		imageWidthLabel.textContent = "Width ";
@@ -210,6 +217,7 @@ class imageEditorJs {
 		inputsContainer.appendChild(imageUrlInput);
 		inputsContainer.appendChild(customizationContainer);
 		inputsContainer.appendChild(textContentInput);
+		outputControllers.appendChild(saveTextContentsButton);
 		outputControllers.appendChild(showOutputPreviewButton);
 		outputControllers.appendChild(hideOutputPreviewButton);
 		inputsContainer.appendChild(outputControllers);
@@ -240,6 +248,17 @@ class imageEditorJs {
 
 		hideOutputPreviewButton.addEventListener("click", () => {
 			document.querySelector(".outputPreviewContainer").style.display = "none";
+		});
+
+		saveTextContentsButton.addEventListener("click", () => {
+			this.layoutEditorJs
+				.save()
+				.then((outputData) => {
+					this.textContent = outputData;
+				})
+				.catch((error) => {
+					console.log("Saving failed: ", error);
+				});
 		});
 
 		this.mainContainer = mainContainer;
@@ -282,7 +301,6 @@ class imageEditorJs {
 
 	save(blockContent) {
 		const imageUrl = blockContent.querySelector(".imageUrlInput").value.trim();
-		const captionElement = blockContent.querySelector(".textContentInput");
 		const imagePosition = blockContent.querySelector(
 			".imagePositionInput"
 		).value;
@@ -292,28 +310,19 @@ class imageEditorJs {
 
 		return {
 			imageUrl: imageUrl,
-			textContent: captionElement.innerHTML,
+			textContent: this.textContent,
 			imagePosition: imagePosition,
 			imageWidthPercentage: imageWidthPercentage,
-			isCaptionEmpty: captionElement.textContent === "",
 		};
 	}
 
 	validate(savedData) {
-		const { imageUrl, isCaptionEmpty, imagePosition, imageWidthPercentage } =
-			savedData;
+		const { imageUrl, imagePosition, imageWidthPercentage } = savedData;
 
 		let isValidated = false;
 
-		if (
-			imageUrl.length > 0 &&
-			!isCaptionEmpty &&
-			imagePosition &&
-			imageWidthPercentage
-		)
+		if (imageUrl.length > 0 && imagePosition && imageWidthPercentage)
 			isValidated = true;
-
-		console.table(savedData);
 
 		if (!isValidated) {
 			return false;
