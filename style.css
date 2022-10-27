@@ -151,7 +151,7 @@ dialog {
 }
 
 .textContentInput .ce-toolbar__actions,
-.outputPreviewContainer.ce-toolbar__actions {
+.outputPreviewContainer .ce-toolbar__actions {
 	display: none !important;
 }
 

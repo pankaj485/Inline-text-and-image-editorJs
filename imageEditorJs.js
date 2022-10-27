@@ -17,6 +17,8 @@ class imageEditorJs {
 	}
 
 	render() {
+		const randomIndex = (Math.random() + 1).toString(36).substring(7);
+
 		const data = {
 			blocks: [
 				{
@@ -101,7 +103,7 @@ class imageEditorJs {
 		this.useNestedEditorJs = () => {
 			// create new editorJs instance and use it inside editableDiv element
 			let textContentInput_editorjs_instance = new EditorJS({
-				holder: "textContentInput",
+				holder: "textContentInput" + randomIndex,
 				autofocus: true,
 				tools: tools,
 				data: data,
@@ -145,7 +147,7 @@ class imageEditorJs {
 			imageUrlLabel.classList.add("imageUrlLabel");
 			imageUrlInput.classList.add("imageUrlInput");
 			textContentInput.classList.add("textContentInput");
-			textContentInput.id = "textContentInput";
+			textContentInput.id = "textContentInput" + randomIndex;
 			imagePositionInput.classList.add("imagePositionInput");
 			showOutputPreviewButton.classList.add("showOutputPreviewButton");
 			outputControllers.classList.add("outputControllers");
@@ -157,6 +159,7 @@ class imageEditorJs {
 			imageWidthContainer.classList.add("imageWidthContainer");
 			imagePositionContainer.classList.add("imagePositionContainer");
 			outputPreviewContainer.classList.add("outputPreviewContainer");
+			outputPreviewContainer.id = "outputPreviewContainer" + randomIndex;
 			outputTextContainer.classList.add("outputTextContainer");
 			outputImageContainer.classList.add("outputImageContainer");
 		};
@@ -236,7 +239,6 @@ class imageEditorJs {
 			const textContent = textContentInput.innerHTML;
 			const imagePosition = imagePositionInput.value;
 			const imageWidthOption = imageWidthInputOption.value;
-
 			const outputPreviewContainer = this.outputPreviewContainer;
 			const outputTextContainer = this.outputTextContainer;
 			const outputImageContainer = this.outputImageContainer;
@@ -255,7 +257,9 @@ class imageEditorJs {
 		});
 
 		hideOutputPreviewButton.addEventListener("click", () => {
-			document.querySelector(".outputPreviewContainer").style.display = "none";
+			document.getElementById(
+				"outputPreviewContainer" + randomIndex
+			).style.display = "none";
 		});
 
 		saveTextContentsButton.addEventListener("click", () => {
