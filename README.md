@@ -1,17 +1,19 @@
-# inline-text-paragraph-editorJs
+# inline-text-and-image-editorJs
 
-creating custom editorJs plugin to get linline image and paragraph elements.
+creating custom editorJs plugin which includes option to add an image and text input on same block.
 
-## Prerequisite
+### Running app through CLI with live-server
 
-- Use [live-server](https://www.npmjs.com/package/live-server) npm package.
-- Install live-server with node
+1. clone the repo.
+2. cd into the project.
+3. run app with [live-server](https://www.npmjs.com/package/live-server):
+   `live-server`
 
-  > npm install -g live-server
+Install live-server with node:
+`npm install -g live-server`
 
-## Run app locally
+### Running app through GUI without live-server
 
-- clone the repo
-- cd into the project
-- run app with live-server
-  > live-server
+1. clone the repo.
+2. open the repo and find `index.html`.
+3. click `index.html` file to open on browser.
