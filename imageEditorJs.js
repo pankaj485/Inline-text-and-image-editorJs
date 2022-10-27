@@ -198,7 +198,7 @@ class imageEditorJs {
 		// textContentInput.setAttribute("placeholder", "Content...");
 		textContentInput.innerHTML =
 			this.data && this.data.caption ? this.data.caption : "";
-		saveTextContentsButton.textContent = "save cotents";
+		saveTextContentsButton.textContent = "save contents";
 		showOutputPreviewButton.textContent = "show output";
 		hideOutputPreviewButton.textContent = "hide output";
 		imageWidthLabel.textContent = "Width ";
