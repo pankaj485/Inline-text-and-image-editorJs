@@ -1,4 +1,4 @@
-class inlineTextAndImage {
+class InlineTextAndImage {
 	static get toolbox() {
 		return {
 			title: "Inline Text And Image",
@@ -16,6 +16,7 @@ class inlineTextAndImage {
 		this.textContent = undefined;
 	}
 
+	/* prepare and show UI elements  */
 	render() {
 		const randomIndex = (Math.random() + 1).toString(36).substring(7);
 
@@ -245,7 +246,7 @@ class inlineTextAndImage {
 
 			outputPreviewContainer.style.display = "flex";
 
-			this._createImage(
+			this._generateOutput(
 				imageUrl,
 				imagePosition,
 				textContent,
@@ -277,7 +278,8 @@ class inlineTextAndImage {
 		return mainContainer;
 	}
 
-	_createImage(
+	/* create output based on inputs */
+	_generateOutput(
 		imageUrl,
 		imagePosition,
 		textContent,
@@ -311,6 +313,7 @@ class inlineTextAndImage {
 		this.mainContainer.append(outputPreviewContainer);
 	}
 
+	/* save get data from DOM and return relevant data */
 	save(blockContent) {
 		const imageUrl = blockContent.querySelector(".imageUrlInput").value.trim();
 		const imagePosition = blockContent.querySelector(
@@ -320,26 +323,32 @@ class inlineTextAndImage {
 			".imageWidthInputOption"
 		).value;
 
-		return {
+		const imageInfo = {
 			imageUrl: imageUrl,
-			textContent: this.textContent,
 			imagePosition: imagePosition,
 			imageWidthPercentage: imageWidthPercentage,
 		};
+
+		return {
+			imageInfo: imageInfo,
+			textContent: this.textContent,
+		};
 	}
 
-	validate(savedData) {
-		const { imageUrl, imagePosition, imageWidthPercentage } = savedData;
+	/* validate input field */
+	// validate(savedData) {
+	// 	const { imageUrl, imagePosition, imageWidthPercentage } =
+	// 		savedData.imageInfo;
 
-		let isValidated = false;
+	// 	let isValidated = false;
 
-		if (imageUrl.length > 0 && imagePosition && imageWidthPercentage)
-			isValidated = true;
+	// 	if (imageUrl.length > 0 && imagePosition && imageWidthPercentage)
+	// 		isValidated = true;
 
-		if (!isValidated) {
-			return false;
-		}
+	// 	if (!isValidated) {
+	// 		return false;
+	// 	}
 
-		return true;
-	}
+	// 	return true;
+	// }
 }
