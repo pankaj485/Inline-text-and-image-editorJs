@@ -1,4 +1,4 @@
-class imageEditorJs {
+class inlineTextAndImage {
 	static get toolbox() {
 		return {
 			title: "Inline Text And Image",
